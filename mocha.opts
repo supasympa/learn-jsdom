@@ -1,0 +1,8 @@
+--recursive
+--require ts-node/register
+--sort
+--timeout 500
+--full-trace
+--prof
+--log-timer-events
+

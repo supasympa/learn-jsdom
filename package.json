@@ -1,0 +1,58 @@
+{
+  "name": "seed-ts",
+  "version": "1.0.0",
+  "description": "An starting point for Typescript projects",
+  "main": "index.ts",
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "parcel build ./src/index.ts --out-dir dist/",
+    "test": "mocha --opts './mocha.opts' ./spec/**/*.spec.ts",
+    "test:watch": "mocha -w --watch-extensions 'ts' --opts './mocha.opts' ./spec/**/*.spec.ts",
+    "clean-install": "rm -rf ./node_modules && npm i",
+    "prepackage": "rm -rf target && mkdir target",
+    "package": "ts-node ./scripts/package-lambda.ts",
+    "create": "ts-node ./scripts/create-lambda.ts",
+    "encrypt": "ts-node ./scripts/encrypt-all.ts",
+    "decrypt": "ts-node ./scripts/decrypt-all.ts",
+    "postpull": "npm run decrypt",
+    "precommit": "npm run encrypt",
+    "test-invoke": "ts-node -e 'require(\"./scripts/invoke-lambda\").invokeLambda({})'",
+    "update": "ts-node ./scripts/update-lambda.ts",
+    "predeploy": "npm run package",
+    "deploy-new": "npm run build && npm run package && npm run create",
+    "deploy": "npm run build && npm run package && npm run update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supasympa/seed-ts.git"
+  },
+  "keywords": [
+    "Typescript",
+    "Javascript"
+  ],
+  "author": "Lewis Barclay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supasympa/seed-ts/issues"
+  },
+  "homepage": "https://github.com/supasympa/seed-ts#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.15",
+    "@types/chai": "4.1.7",
+    "@types/chai-as-promised": "7.1.0",
+    "@types/jsdom": "^12.2.0",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "10.12.3",
+    "aws-sdk": "2.350.0",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "jsdom": "13.0.0",
+    "mocha": "5.2.0",
+    "parcel-bundler": "1.10.3",
+    "prettier": "1.14.3",
+    "prettier-tslint": "0.4.0",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "typescript": "3.1.6"
+  }
+}
